@@ -1,0 +1,21 @@
+version: '2.1'
+
+services:
+  redis:
+    image: 'docker.io/bitnami/redis:6.0-debian-10'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+      - REDIS_AOF_ENABLED=no
+    ports:
+      - '6379:6379'
+    sysctls:
+      - net.core.somaxconn=1024
+      - net.ipv4.tcp_syncookies=0
+#    volumes:
+#      - 'redis_data:/bitnami/redis/data'
+#
+#volumes:
+#  redis_data:
+#    driver: local
